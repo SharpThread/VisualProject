@@ -1,0 +1,337 @@
+﻿<UserControl
+    x:Class="VisualCOM.View.SettingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="clr-namespace:VisualCOM.ValueConvert"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:VisualCOM.View"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:rule="clr-namespace:VisualCOM.Rule"
+    xmlns:vm="clr-namespace:VisualCOM.ViewModel"
+    d:DesignHeight="643.478260869565"
+    d:DesignWidth="976"
+    mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:SettingPageViewModel />
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <rule:StringToDoubleRule x:Key="StringToDoubleRule" />
+        <c:ForgroundThemeConvert x:Key="ForgroundThemeConvert" />
+    </UserControl.Resources>
+    <StackPanel HorizontalAlignment="Left">
+        <WrapPanel>
+            <GroupBox
+                Width="230"
+                Height="320"
+                Margin="10,22,0,0"
+                Background="White"
+                FontSize="18"
+                Header="串口配置">
+                <StackPanel Orientation="Vertical">
+                    <WrapPanel Margin="0,5,0,5">
+                        <TextBlock
+                            Width="80"
+                            VerticalAlignment="Center"
+                            Text="端口" />
+                        <ComboBox
+                            Width="100"
+                            ItemsSource="{Binding PortNames}"
+                            SelectedValue="{Binding PortName}" />
+                    </WrapPanel>
+                    <WrapPanel Margin="0,0,0,5">
+
+                        <TextBlock
+                            Width="80"
+                            VerticalAlignment="Center"
+                            Text="波特率" />
+                        <ComboBox
+                            Width="100"
+                            materialDesign:HintAssist.Hint="BaudRate"
+                            materialDesign:HintAssist.HintOpacity=".26"
+                            IsEditable="True"
+                            ItemsSource="{Binding BaudRates}">
+                            <ComboBox.Text>
+                                <Binding Path="BaudRate" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <rule:CheckBaudRateRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </ComboBox.Text>
+                        </ComboBox>
+                    </WrapPanel>
+                    <WrapPanel Margin="0,0,0,5">
+                        <TextBlock
+                            Width="80"
+                            VerticalAlignment="Center"
+                            Text="数据位" />
+                        <ComboBox
+                            Width="100"
+                            ItemsSource="{Binding DataBits}"
+                            SelectedValue="{Binding DataBit}" />
+                    </WrapPanel>
+                    <WrapPanel Margin="0,0,0,5">
+                        <TextBlock
+                            Width="80"
+                            VerticalAlignment="Center"
+                            Text="校验位" />
+                        <ComboBox
+                            Width="100"
+                            ItemsSource="{Binding Paritys}"
+                            SelectedValue="{Binding Parity}" />
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock
+                            Width="80"
+                            VerticalAlignment="Center"
+                            Text="停止位" />
+                        <ComboBox
+                            Width="100"
+                            ItemsSource="{Binding StopBits}"
+                            SelectedValue="{Binding StopBit}" />
+                    </WrapPanel>
+                    <Button
+                        Height="30"
+                        Margin="10"
+                        Command="{Binding SaveArgCommand}"
+                        Content="保存参数配置"
+                        Cursor="Hand"
+                        Foreground="White"
+                        Style="{StaticResource MaterialDesignFlatLightBgButton}" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox
+                Width="240"
+                Height="320"
+                Margin="8,22,0,0"
+                Background="White"
+                FontSize="18"
+                Header="绘图配置">
+                <StackPanel Orientation="Vertical">
+                    <WrapPanel Margin="0,5,0,5">
+                        <TextBlock
+                            Width="70"
+                            VerticalAlignment="Center"
+                            Text="通道" />
+                        <ComboBox
+                            Width="100"
+                            ItemsSource="{Binding ChannelNames}"
+                            SelectedValue="{Binding ChannelName}" />
+                    </WrapPanel>
+                    <WrapPanel Margin="0,0,0,5">
+                        <TextBlock
+                            Width="70"
+                            VerticalAlignment="Center"
+                            Text="类型" />
+                        <ComboBox
+                            Width="100"
+                            ItemsSource="{Binding ChartTypes}"
+                            SelectedValue="{Binding ChartType}" />
+                    </WrapPanel>
+
+                    <WrapPanel Margin="0,0,0,5">
+                        <WrapPanel.Resources>
+                            <c:CustomStyleConvert x:Key="CustomStyleConvert" />
+                        </WrapPanel.Resources>
+                        <TextBlock
+                            Width="65"
+                            VerticalAlignment="Center"
+                            Text="样式" />
+                        <RadioButton
+                            Margin="5,0,0,0"
+                            Content="默认"
+                            GroupName="1"
+                            IsChecked="{Binding IsCustom}" />
+                        <RadioButton
+                            Margin="5,0,0,0"
+                            Content="自定义"
+                            GroupName="1"
+                            IsChecked="{Binding IsCustom, Converter={StaticResource CustomStyleConvert}}" />
+                    </WrapPanel>
+
+                    <Button
+                        Height="30"
+                        Margin="10"
+                        Command="{Binding AddChartArgsCommand}"
+                        Content="添加绘图"
+                        Foreground="White"
+                        Style="{StaticResource MaterialDesignFlatLightBgButton}" />
+                    <Button
+                        Height="30"
+                        Margin="10"
+                        Command="{Binding SaveChartArgsCommand}"
+                        Content="保存参数配置"
+                        Foreground="White"
+                        Style="{StaticResource MaterialDesignFlatLightBgButton}" />
+                </StackPanel>
+            </GroupBox>
+            <TabControl
+                Width="230"
+                Height="320"
+                Margin="8,22,0,0"
+                Style="{StaticResource MaterialDesignFilledTabControl}">
+                <TabControl.Resources>
+                    <c:CustomStyleConvert x:Key="CustomStyleConvert" />
+                    <c:StringDoubleConvert x:Key="StringDoubleConvert" />
+                </TabControl.Resources>
+                <TabItem FontSize="18" Header="点样式">
+                    <StackPanel Background="White">
+                        <WrapPanel Margin="5,10,0,5">
+                            <TextBlock
+                                Width="70"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Text="大小" />
+                            <TextBox Width="100" IsEnabled="{Binding IsCustom, Converter={StaticResource CustomStyleConvert}}">
+                                <TextBox.Text>
+                                    <Binding Path="PointSize" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <rule:StringToDoubleRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                        </WrapPanel>
+                        <WrapPanel Margin="5,10,0,5">
+                            <TextBlock
+                                Width="70"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Text="形状" />
+                            <ComboBox
+                                Width="100"
+                                IsEnabled="{Binding IsCustom, Converter={StaticResource CustomStyleConvert}}"
+                                ItemsSource="{Binding PointShapes}"
+                                SelectedValue="{Binding PointShape}" />
+                        </WrapPanel>
+                    </StackPanel>
+                </TabItem>
+                <TabItem
+                    FontSize="18"
+                    Foreground="Black"
+                    Header="线样式">
+                    <StackPanel Background="White">
+                        <WrapPanel Margin="5,10,0,5">
+                            <TextBlock
+                                Width="70"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Text="粗细" />
+                            <TextBox Width="100" IsEnabled="{Binding IsCustom, Converter={StaticResource CustomStyleConvert}}">
+                                <TextBox.Text>
+                                    <Binding Path="LineSize" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <rule:StringToDoubleRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                        </WrapPanel>
+                        <WrapPanel Margin="5,10,0,5">
+                            <TextBlock
+                                Width="70"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Text="外观" />
+                            <ComboBox
+                                Width="100"
+                                IsEnabled="{Binding IsCustom, Converter={StaticResource CustomStyleConvert}}"
+                                ItemsSource="{Binding LineShapes}"
+                                SelectedValue="{Binding LineShape}" />
+                        </WrapPanel>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+
+            <GroupBox
+                Width="230"
+                Height="320"
+                Margin="8,22,0,0"
+                Background="White"
+                FontSize="18"
+                Header="公共样式">
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <c:CustomStyleConvert x:Key="CustomStyleConvert" />
+                    </StackPanel.Resources>
+                    <WrapPanel Margin="0,5,0,5">
+                        <TextBlock
+                            Width="75"
+                            VerticalAlignment="Center"
+                            Text="颜色" />
+                        <ComboBox
+                            Width="100"
+                            IsEnabled="{Binding IsCustom, Converter={StaticResource CustomStyleConvert}}"
+                            ItemsSource="{Binding ChartColors}"
+                            SelectedValue="{Binding ChartColor}" />
+                    </WrapPanel>
+                    <WrapPanel Margin="0,5,0,5">
+                        <TextBlock
+                            Width="75"
+                            VerticalAlignment="Center"
+                            Text="主题风格" />
+                        <ComboBox
+                            Width="100"
+                            IsEnabled="{Binding IsCustom, Converter={StaticResource CustomStyleConvert}}"
+                            ItemsSource="{Binding ChartStyles}"
+                            SelectedValue="{Binding ChartStyle}" />
+                    </WrapPanel>
+                </StackPanel>
+            </GroupBox>
+        </WrapPanel>
+        <WrapPanel HorizontalAlignment="Center">
+            <DataGrid
+                Width="590"
+                Height="240"
+                Margin="0,30,0,0"
+                AutoGenerateColumns="False"
+                Background="White"
+                CanUserAddRows="False"
+                ItemsSource="{Binding ChartSource}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding ChannelName}"
+                        Header="通道"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding ChartType}"
+                        Header="类型"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding PointSize}"
+                        Header="点大小"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding PointShape}"
+                        Header="点形状"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding LineSize}"
+                        Header="线粗细"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding LineShape}"
+                        Header="线外观"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Color}"
+                        Header="颜色"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Style}"
+                        Header="主题风格"
+                        IsReadOnly="True" />
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </WrapPanel>
+    </StackPanel>
+</UserControl>

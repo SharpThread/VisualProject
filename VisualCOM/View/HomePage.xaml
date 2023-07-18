@@ -1,0 +1,208 @@
+﻿<UserControl
+    x:Class="VisualCOM.View.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:VisualCOM.View"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="643.478260869565"
+    d:DesignWidth="976"
+    mc:Ignorable="d">
+    <Grid Margin="18,18,18,3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*" />
+            <RowDefinition Height="4*" />
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="1" Margin="0,6,0,0">
+            <Border
+                Width="260"
+                Height="210"
+                Background="#3B76EE"
+                CornerRadius="7">
+                <StackPanel>
+                    <TextBlock
+                        Margin="10,0,0,0"
+                        FontSize="15"
+                        Foreground="White"
+                        Text="反馈提交" />
+                    <WrapPanel Margin="5,10,0,0">
+                        <TextBlock FontSize="14" Text="email:1942874468@qq.com" />
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+            <Border
+                Width="260"
+                Height="210"
+                Margin="10,0,0,0"
+                Background="#3B76EE"
+                CornerRadius="7">
+                <StackPanel>
+                    <TextBlock
+                        Margin="10,0,0,0"
+                        FontSize="15"
+                        Foreground="White"
+                        Text="引用框架" />
+                    <WrapPanel Margin="5,10,0,0">
+                        <TextBlock FontSize="14" Text="UI框架:MaterialDesign" />
+                        <TextBox
+                            Background="#3B76EE"
+                            BorderThickness="0"
+                            FontSize="14"
+                            IsReadOnly="True"
+                            Style="{x:Null}"
+                            Text="http://materialdesigninxaml.net/" />
+                    </WrapPanel>
+
+                    <WrapPanel Margin="5,10,0,0">
+                        <TextBlock FontSize="14" Text="MVMM框架:CommunityToolkit.Mvvm" />
+                        <TextBox
+                            Background="#3B76EE"
+                            BorderThickness="0"
+                            FontSize="14"
+                            IsReadOnly="True"
+                            Style="{x:Null}"
+                            Text="https://learn.microsoft.com/zh-cn/dotnet/communitytoolkit/mvvm/"
+                            TextWrapping="Wrap" />
+                    </WrapPanel>
+                    <WrapPanel Margin="5,10,0,0">
+                        <TextBlock FontSize="14" Text="Chart组件:Scottplot" />
+                        <TextBox
+                            Background="#3B76EE"
+                            BorderThickness="0"
+                            FontSize="14"
+                            IsReadOnly="True"
+                            Style="{x:Null}"
+                            Text="https://scottplot.net/"
+                            TextWrapping="Wrap" />
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+            <Border
+                Width="316"
+                Height="210"
+                Margin="10,0,0,0"
+                Background="#3B76EE"
+                CornerRadius="7">
+                <StackPanel>
+                    <TextBlock
+                        Margin="10,0,0,0"
+                        FontSize="15"
+                        Foreground="White"
+                        Text="相关地址" />
+                    <WrapPanel Margin="5,10,0,0">
+                        <TextBlock FontSize="14">
+                            博客地址:<Hyperlink
+                                x:Name="linkBlogs"
+                                Click="linkBlogs_Click"
+                                NavigateUri="https://www.cnblogs.com/hngyElectronic/">
+                                Click me
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock FontSize="14" Text="https://www.cnblogs.com/hngyElectronic/" />
+                    </WrapPanel>
+
+                    <WrapPanel Margin="5,10,0,0">
+                        <TextBlock FontSize="14">
+                            Github地址:<Hyperlink
+                                x:Name="linkGithub"
+                                Click="linkGithub_Click"
+                                NavigateUri="https://github.com/SharpThreed/VisualProject">
+                                Click me
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock
+                            FontSize="14"
+                            Text="https://github.com/SharpThreed/VisualProject"
+                            TextWrapping="Wrap" />
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+        </WrapPanel>
+        <WrapPanel Grid.Row="0" HorizontalAlignment="Center">
+            <Border
+                Width="935"
+                Height="388"
+                Background="#3B76EE"
+                CornerRadius="15">
+                <StackPanel>
+                    <WrapPanel>
+                        <TextBlock
+                            Margin="15,5,0,0"
+                            FontSize="24"
+                            Foreground="White"
+                            Text="Tips" />
+                        <materialDesign:PackIcon
+                            Width="30"
+                            Height="40"
+                            Foreground="White"
+                            Kind="AlertBox" />
+                    </WrapPanel>
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        Background="#3B76EE"
+                        Foreground="White">
+                        <Expander.Header>
+                            <TextBlock FontSize="18" Text="1.关于使用" />
+                        </Expander.Header>
+                        <StackPanel>
+                            <TextBlock
+                                Margin="35,0,0,0"
+                                FontSize="14"
+                                Text="① Chart字符串解析格式为帧头 数据帧 分隔符 帧尾 (分隔符=数据帧-1)" />
+                            <TextBlock
+                                Margin="35,10,0,0"
+                                FontSize="14"
+                                Text="② Uart默认使用字符串方法解析(未性能优化)" />
+                        </StackPanel>
+                    </Expander>
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        Background="#3B76EE"
+                        Foreground="White">
+                        <Expander.Header>
+                            <TextBlock FontSize="18" Text="2.编码及绘图点位" />
+                        </Expander.Header>
+                        <StackPanel>
+                            <TextBlock
+                                Margin="35,0,0,0"
+                                FontSize="14"
+                                Text="① 编码默认使用ASCII(暂未追加其它编码)" />
+                            <TextBlock
+                                Margin="35,10,0,0"
+                                FontSize="14"
+                                Text="② Chart默认支持最大100个数据点位(暂未追加最大点位修改)" />
+                        </StackPanel>
+                    </Expander>
+                    <Expander
+                        HorizontalAlignment="Stretch"
+                        Background="#3B76EE"
+                        Foreground="White">
+                        <Expander.Header>
+                            <TextBlock FontSize="18" Text="3.未完善功能" />
+                        </Expander.Header>
+                        <StackPanel>
+                            <TextBlock
+                                Margin="35,0,0,0"
+                                FontSize="14"
+                                Text="1.编码格式" />
+                            <TextBlock
+                                Margin="35,10,0,0"
+                                FontSize="14"
+                                Text="2.数据点位" />
+                            <TextBlock
+                                Margin="35,10,0,0"
+                                FontSize="14"
+                                Text="3.保存到文件" />
+                            <TextBlock
+                                Margin="35,10,0,0"
+                                FontSize="14"
+                                Text="4.日志报表" />
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+
+            </Border>
+        </WrapPanel>
+    </Grid>
+</UserControl>

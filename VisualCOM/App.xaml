@@ -1,0 +1,23 @@
+﻿<Application
+    x:Class="VisualCOM.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:VisualCOM"
+    StartupUri="View/MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#3b76ee" />
+            <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#3b76ee" />
+            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#3b76ee" />
+            <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#000" />
+            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#3b76ee" />
+            <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#3b76ee" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
